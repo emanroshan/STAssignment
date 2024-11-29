@@ -104,7 +104,6 @@ class LoginAppTest {
         }
     }
 
-    // Test 5: Password Validation Test
     @Test
     void testPasswordValidation() {
         String email = "johndoe@example.com";
