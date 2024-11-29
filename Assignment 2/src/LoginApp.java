@@ -45,7 +45,7 @@ public class LoginApp extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String email = emailField.getText();
-            String password = new String(passwordField.getPassword());
+          
 
             String userName = authenticateUser(email, password);
             if (userName != null) {
