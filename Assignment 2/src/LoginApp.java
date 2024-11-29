@@ -10,9 +10,9 @@ import java.sql.ResultSet;
 public class LoginApp extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/softwaretesting";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "12345678";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/login";
+    private static final String DB_USER = "eman";
+    private static final String DB_PASSWORD = "strawberry!@#";
 
     public LoginApp() {
         setTitle("Login Screen");
@@ -58,7 +58,7 @@ public class LoginApp extends JFrame {
 
     private String authenticateUser(String email) {
         String userName = null;
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER)) {
             String query = "SELECT name FROM User WHERE Email = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, email);
