@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main  # Trigger the workflow only for PRs to the main branch
+  push:
+    branches:
+      - main  # Run on push to main (optional)
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'           # Java version to use
+        distribution: 'adoptopenjdk' # Specify the Java distribution (AdoptOpenJDK, Zulu, etc.)
+
+    - name: Install dependencies
+      run: ./gradlew build  # Use the relevant build command for your project
+
+    - name: Run tests
+      run: ./gradlew test  # Use the test command for your project
+
+    - name: Upload test results (optional)
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: ./build/test-results  # Adjust based on your project
+
+    - name: Success message
+      if: success()
+      run: echo "Tests passed successfully!"
